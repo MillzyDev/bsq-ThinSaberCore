@@ -24,7 +24,6 @@ DEFINE_IL2CPP_ARG_TYPE(Vector3, "UnityEngine", "Vector3");
 
 static ModInfo modInfo;
 
-int shouldUpdate = 2;
 Vector3 saberScale;
 
 Configuration& getConfig() {
@@ -56,22 +55,16 @@ extern "C" void setup(ModInfo& info) {
 #pragma endregion
 }
 
-MAKE_HOOK_FIND_CLASS_UNSAFE_STATIC(SceneManager_Internal_ActiveSceneChanged, "UnityEngine.SceneManagement", "SceneManager",
-                                   "Internal_ActiveSceneChanged", void, Il2CppObject *previousActiveScene,
-                                   Il2CppObject *newActiveScene) {
-    SceneManager_Internal_ActiveSceneChanged(previousActiveScene, newActiveScene);
-    shouldUpdate = 2;
-}
+MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(SaberModelController_Init, "", "SaberModelController", "Init", void, Il2CppObject *self,
+                                     Il2CppObject *parent, // UnityEngine.Transform
+                                     Il2CppObject *saber // global::Saber
+                                     ) {
+    SaberModelController_Init(self, parent, saber);
 
-MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(Saber_ManualUpdate, "", "Saber", "ManualUpdate", void,
-                                     Il2CppObject *self) {
-    Saber_ManualUpdate(self);
-
-    if (shouldUpdate) {
-        auto transform = CRASH_UNLESS(il2cpp_utils::GetPropertyValue<Il2CppObject *>(self, "transform"));
-        CRASH_UNLESS(il2cpp_utils::SetPropertyValue(transform, "localScale", saberScale));
-        shouldUpdate--;
-    }
+    Il2CppObject *transform = CRASH_UNLESS(il2cpp_utils::GetPropertyValue(self, "transform")); // get the UnityEngine.Transform of host GameObject
+    static auto *findMethodInfo = CRASH_UNLESS(il2cpp_utils::FindMethodUnsafe(transform, "Find", 1)); // get method info for Transform.Find(String) - returns UnityEngine.Transform
+    Il2CppObject *basicSaberTransform = CRASH_UNLESS(il2cpp_utils::RunMethodUnsafe(transform, findMethodInfo, il2cpp_utils::newcsstr("BasicSaber"))); // Invoke Transform.Find for "BasicSaber"
+    CRASH_UNLESS(il2cpp_utils::SetPropertyValue(basicSaberTransform, "localScale", saberScale)); // Set the localScale of BasicSaber's Transform
 }
 
 extern "C" void load() {
@@ -90,8 +83,7 @@ extern "C" void load() {
     }
 
     getLogger().info("Installing hooks...");
-    INSTALL_HOOK(getLogger(), SceneManager_Internal_ActiveSceneChanged);
-    INSTALL_HOOK(getLogger(), Saber_ManualUpdate);
+    INSTALL_HOOK(getLogger(), SaberModelController_Init);
     getLogger().info("Installed all hooks!");
 
     getLogger().info("Applying thickness...");
