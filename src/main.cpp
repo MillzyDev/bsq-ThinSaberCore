@@ -96,7 +96,7 @@ extern "C" void load() {
 
     getLogger().info("Applying thickness...");
     float thickness = GET_CONFIG_VALUE(THICKNESS_VALUE, GetFloat());
-    float decidedThickness = thickness > 1.0f ? 1.0f : thickness;
+    float decidedThickness = thickness > 1.0f || thickness < 0.0f ? 1.0f : thickness;
     saberScale.x = decidedThickness;
     saberScale.y = decidedThickness;
     saberScale.z = 1.0f;
