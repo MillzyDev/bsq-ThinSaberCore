@@ -37,12 +37,6 @@ I think this goes without saying that this is the value you edit to change the t
 It can be any value between 0 and 1 inclusive. 1 being normal size. <br>
 If you try to make this value greater than 1 or less than 0, it will default back to a thickness of 1.
 
-### TrickSaberSafeMode
-#### Type: Boolean
-If this is `true`, and TrickSaber is installed, the mod will not work. <br>
-This is to prevent a bug where, if the saber is thrown, the saber thrown will get thinner and longer. <br>
-If you want to disable this, set the value to `false`
-
 ## How does it work?
 To understand how ThinSaberLite remains version agnostic, we first need to understand how `Codegen` works, and what the C++ linker does.
 ### Codegen
