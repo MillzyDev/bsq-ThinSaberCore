@@ -26,17 +26,6 @@ ThinSaberLite does not have any form of UI. It does still have a config however!
 6. Press the `Sync To BeatSaber` button.
 7. Done!
 
-## Config Values
-There are two (2) editable values in the config:
-- `thickness`
-- `tricksaberSafeMode`
-
-### Thickness
-#### Type: Float/Real
-I think this goes without saying that this is the value you edit to change the thickness. <br>
-It can be any value between 0 and 1 inclusive. 1 being normal size. <br>
-If you try to make this value greater than 1 or less than 0, it will default back to a thickness of 1.
-
 ## How does it work?
 To understand how ThinSaberLite remains version agnostic, we first need to understand how `Codegen` works, and what the C++ linker does.
 ### Codegen
