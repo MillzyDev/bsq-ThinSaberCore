@@ -18,7 +18,7 @@ A version agnostic[^1] Beat Saber mod that can make your saber's thinner.
 
 ### Editing the Config
 ThinSaberLite does not have any form of UI. It does still have a config however!
-1. Download `thinsaberlite.json` from the [releases]() page or from the [Beat Saber Modding Group](https://discord.gg/beatsabermods).
+1. Download `thinsaberlite.json` from the [releases](https://github.com/MillzyDev/bsq-ThinSaberLite/releases/latest) page or from the [Beat Saber Modding Group](https://discord.gg/beatsabermods).
 2. Open the downloaded JSON file in your favourite text editor.
 3. Edit the values to your liking.
 4. Save the file.
