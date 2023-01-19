@@ -1,7 +1,6 @@
 #include "main.hpp"
 
 #define THICKNESS_VALUE "thickness"
-#define TRICKSABER_SAFE_MODE_VALUE "tricksaberSafeMode"
 
 #define CONFIG_VALUE_EXISTS(value) getConfig().config.HasMember(value)
 #define DEFINE_CONFIG_ALLOCATOR() rapidjson::Document::AllocatorType& allocator = getConfig().config.GetAllocator()
@@ -11,6 +10,8 @@
 #define GET_CONFIG_VALUE(value, getValue) getConfig().config[value].getValue
 
 #define IS_MOD_LOADED(id) mods.find(id) != mods.end()
+
+#define STRING(str) il2cpp_utils::newcsstr(str)
 
 #pragma region Vector3
 typedef struct Vector3 {
@@ -25,6 +26,7 @@ DEFINE_IL2CPP_ARG_TYPE(Vector3, "UnityEngine", "Vector3");
 static ModInfo modInfo;
 
 Vector3 saberScale;
+Vector3 fakeGlowScale;
 
 Configuration& getConfig() {
     static Configuration config(modInfo);
@@ -48,10 +50,6 @@ extern "C" void setup(ModInfo& info) {
         ADD_CONFIG_VALUE(THICKNESS_VALUE, SetFloat(0.5f), CONFIG_ALLOCATOR);
         WRITE_CONFIG();
     }
-    if (!CONFIG_VALUE_EXISTS(TRICKSABER_SAFE_MODE_VALUE)) {
-        ADD_CONFIG_VALUE(TRICKSABER_SAFE_MODE_VALUE, SetBool(true), CONFIG_ALLOCATOR);
-        WRITE_CONFIG();
-    }
 #pragma endregion
 }
 
@@ -61,10 +59,24 @@ MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(SaberModelController_Init, "", "SaberModelC
                                      ) {
     SaberModelController_Init(self, parent, saber);
 
-    Il2CppObject *transform = CRASH_UNLESS(il2cpp_utils::GetPropertyValue(self, "transform")); // get the UnityEngine.Transform of host GameObject
-    static auto *findMethodInfo = CRASH_UNLESS(il2cpp_utils::FindMethodUnsafe(transform, "Find", 1)); // get method info for Transform.Find(String) - returns UnityEngine.Transform
-    Il2CppObject *basicSaberTransform = CRASH_UNLESS(il2cpp_utils::RunMethodUnsafe(transform, findMethodInfo, il2cpp_utils::newcsstr("BasicSaber"))); // Invoke Transform.Find for "BasicSaber"
-    CRASH_UNLESS(il2cpp_utils::SetPropertyValue(basicSaberTransform, "localScale", saberScale)); // Set the localScale of BasicSaber's Transform
+    // Get Transform of SaberModelContainer(Clone)
+    Il2CppObject *transform = CRASH_UNLESS(il2cpp_utils::GetPropertyValue(self, "transform"));
+    static auto *findMethodInfo = CRASH_UNLESS(il2cpp_utils::FindMethodUnsafe(transform, "Find", 1));
+
+    // Scale BasicSaber
+    Il2CppObject *basicSaberTransform = CRASH_UNLESS(il2cpp_utils::RunMethodUnsafe(transform, findMethodInfo, STRING("BasicSaber")));
+    if (!basicSaberTransform) return; // Stop if nullptr
+    CRASH_UNLESS(il2cpp_utils::SetPropertyValue(basicSaberTransform, "localScale", saberScale));
+
+    // Scale FakeGlow0
+    Il2CppObject *fakeGlow0Transform = CRASH_UNLESS(il2cpp_utils::RunMethodUnsafe(transform, findMethodInfo, STRING("FakeGlow0")));
+    if (!fakeGlow0Transform) return; // Stop if nullptr
+    CRASH_UNLESS(il2cpp_utils::SetPropertyValue(fakeGlow0Transform, "localScale", fakeGlowScale));
+
+    // Scale FakeGlow1
+    Il2CppObject *fakeGlow1Transform = CRASH_UNLESS(il2cpp_utils::RunMethodUnsafe(transform, findMethodInfo, STRING("FakeFlow1")));
+    if (!fakeGlow1Transform) return; // Stop if nullptr
+    CRASH_UNLESS(il2cpp_utils::SetPropertyValue(fakeGlow1Transform, "localScale", fakeGlowScale));
 }
 
 extern "C" void load() {
@@ -77,19 +89,13 @@ extern "C" void load() {
         return;
     }
 
-    if (IS_MOD_LOADED("tricksaber") && GET_CONFIG_VALUE(TRICKSABER_SAFE_MODE_VALUE, GetBool())) {
-        getLogger().info("TrickSaber is installed with TrickSaber Safe Mode on. Not continuing with hook installs.");
-        return;
-    }
-
     getLogger().info("Installing hooks...");
     INSTALL_HOOK(getLogger(), SaberModelController_Init);
     getLogger().info("Installed all hooks!");
 
     getLogger().info("Applying thickness...");
     float thickness = GET_CONFIG_VALUE(THICKNESS_VALUE, GetFloat());
-    float decidedThickness = thickness > 1.0f || thickness < 0.0f ? 1.0f : thickness;
-    saberScale.x = decidedThickness;
-    saberScale.y = decidedThickness;
-    saberScale.z = 1.0f;
+    [[maybe_unused]] float decidedThickness = thickness > 1.0f || thickness < 0.0f ? 1.0f : thickness;
+    saberScale = {decidedThickness, decidedThickness, 1.0f};
+    fakeGlowScale = {decidedThickness, 1.0f, decidedThickness};
 }
