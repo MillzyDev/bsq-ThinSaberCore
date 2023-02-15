@@ -2,7 +2,7 @@
   "configurations": [
     {
       "defines": [
-        "MOD_ID=\"thinsaberlite\"",
+        "MOD_ID=\"#{id}\"",
         "VERSION=\"0.1.0\"",
         "__GNUC__",
         "__aarch64__"
@@ -15,7 +15,7 @@
         "${workspaceFolder}/shared", 
         "${workspaceFolder}",
         
-        "C:/Users/millz/AppData/Roaming/Android/NDK/**",
+        "#{ndkpath}/**",
         "${default}"
       ],
       "name": "Quest",
