@@ -4,11 +4,14 @@
 
 #include "beatsaber-hook/shared/utils/il2cpp-functions.hpp"
 
-void ThinSaberCore::Setup() {
-    getConfig().Load();
-}
+namespace ThinSaberCore {
+    void Setup() {
+        Config::loadConfig();
+        Config::setupConfig();
+    }
 
-void ThinSaberCore::Load() {
-    il2cpp_functions::Init();
-    Hooks::InstallAllHooks();
+    void Load() {
+        il2cpp_functions::Init();
+        Hooks::InstallAllHooks();
+    }
 }
