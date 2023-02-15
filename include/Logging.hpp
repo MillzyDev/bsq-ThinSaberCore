@@ -2,4 +2,9 @@
 
 #include "beatsaber-hook/shared/utils/logging.hpp"
 
-Logger& getLogger();
+namespace ThinSaberCore {
+    class Logging {
+    public:
+        static Logger& getLogger();
+    };
+}
