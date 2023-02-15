@@ -4,6 +4,7 @@
 
 namespace ThinSaberCore::Il2CppMethods {
     class Component {
+    public:
         static Il2CppObject *get_transform(Il2CppObject *obj);
     };
 }
