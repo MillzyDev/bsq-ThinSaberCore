@@ -1,11 +1,11 @@
 #include "main.hpp"
 #include "ThinSaberCore.hpp"
 
-extern "C" void setup(ModInfo &info) {
+extern "C" [[maybe_unused]] void setup(ModInfo &info) {
     info = modInfo;
     ThinSaberCore::Setup();
 }
 
-extern "C" void load() {
+extern "C" [[maybe_unused]] void load() {
     ThinSaberCore::Load();
 }
