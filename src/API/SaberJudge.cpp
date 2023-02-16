@@ -3,9 +3,19 @@
 
 namespace ThinSaberCore {
     bool SaberJudge::isSaberScaleLegal() {
+        return isThicknessLegal() && isLengthLegal();
+    }
+
+    bool SaberJudge::isThicknessLegal() {
         float thickness = Config::getThickness();
-        float length = Config::getLength();
-        bool legal = thickness > 0.0f && thickness < 1.0f && length == 1.0f;
-        return legal;
+        return thickness > 0.0f && thickness < 1.0f;
+    }
+
+    bool SaberJudge::isLengthLegal() {
+        return Config::getLength() == 1.0f;
+    }
+
+    bool SaberJudge::setLawEnforcement(bool value) {
+        return false;
     }
 }
