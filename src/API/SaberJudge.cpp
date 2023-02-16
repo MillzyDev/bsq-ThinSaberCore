@@ -15,7 +15,11 @@ namespace ThinSaberCore {
         return Config::getLength() == 1.0f;
     }
 
-    bool SaberJudge::setLawEnforcement(bool value) {
-        return false;
+    bool SaberJudge::getLawEnforcement() {
+        return Config::getLawEnforcement();
+    }
+
+    void SaberJudge::setLawEnforcement(bool value) {
+        Config::setLawEnforcement(value);
     }
 }
