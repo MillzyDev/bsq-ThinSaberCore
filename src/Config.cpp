@@ -6,6 +6,7 @@
 
 #define THICKNESS "thickness"
 #define LENGTH "length"
+#define LAW_ENFORCEMENT "law_enforcement"
 
 namespace ThinSaberCore {
     Configuration& Config::getConfig() {
@@ -27,8 +28,13 @@ namespace ThinSaberCore {
             getConfig().Write();
         }
 
-        if (!CONFIG_VALUE_EXISTS("length")) {
-            getConfig().config.AddMember(THICKNESS, rapidjson::Value(0).SetFloat(1.0f), allocator);
+        if (!CONFIG_VALUE_EXISTS(LENGTH)) {
+            getConfig().config.AddMember(LENGTH, rapidjson::Value(0).SetFloat(1.0f), allocator);
+            getConfig().Write();
+        }
+
+        if (!CONFIG_VALUE_EXISTS(LAW_ENFORCEMENT)) {
+            getConfig().config.AddMember(LAW_ENFORCEMENT, rapidjson::Value(0).SetFloat(1.0f), allocator);
             getConfig().Write();
         }
     }
@@ -47,5 +53,13 @@ namespace ThinSaberCore {
 
     void Config::setLength(float value) {
         getConfig().config[LENGTH].SetFloat(value);
+    }
+
+    bool Config::getLawEnforcement() {
+        return getConfig().config[LAW_ENFORCEMENT].GetBool();
+    }
+
+    void Config::setLawEnforcement(bool value) {
+        getConfig().config[LAW_ENFORCEMENT].SetBool(value);
     }
 }
