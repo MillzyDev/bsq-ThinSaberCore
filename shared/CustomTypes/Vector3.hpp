@@ -1,3 +1,5 @@
+#pragma once
+
 #include "beatsaber-hook/shared/utils/il2cpp-type-check.hpp"
 
 namespace ThinSaberCore::CustomTypes {
