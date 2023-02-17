@@ -5,6 +5,7 @@
   "author": "Millzy",
   "version": "${version}",
   "description": "${mod_id}, version ${version}!",
+  "packageId": "com.beatgames.beatsaber",
   "dependencies": [],
   "modFiles": [],
   "libraryFiles": [],
