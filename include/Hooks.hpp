@@ -17,7 +17,7 @@ namespace ThinSaberCore {
 #define InstallHooks(func) \
 struct __HookRegister##func {  \
     __HookRegister##func() {   \
-        Hooking::AddInstallFunc(func); \
+        Hooks::AddInstallFunc(func); \
     }                  \
 }; \
 static __HookRegister##func __HookRegisterInstance##func;
