@@ -1,0 +1,13 @@
+{
+  "_QPVersion": "1.0.0",
+  "name": "${mod_name}",
+  "id": "${mod_id}",
+  "author": "Millzy",
+  "version": "${version}",
+  "description": "${mod_id}, version ${version}!",
+  "dependencies": [],
+  "modFiles": [],
+  "libraryFiles": [],
+  "fileCopies": [],
+  "copyExtensions": []
+}
