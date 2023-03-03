@@ -11,6 +11,8 @@ MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(SaberModelController_Init, "", "SaberModelC
 ) {
     SaberModelController_Init(self, parent, saber);
 
+    if (SaberScaler::get_coreScalerDisabled()) return;
+
     CustomTypes::Vector3 saberScale = SaberScaler::getSaberScale();
     CustomTypes::Vector3 glowScale = SaberScaler::getGlowScale();
     // TODO: Legalise scales if the hitbox changes (i forgor)
