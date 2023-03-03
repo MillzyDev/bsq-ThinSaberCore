@@ -52,4 +52,14 @@ namespace ThinSaberCore {
         float length = getLegalisedSaberLength();
         return { thickness, length, thickness};
     }
+
+    void SaberScaler::set_coreScalerDisabled(bool value) {
+        coreScalerDisabled = value;
+    }
+
+    bool SaberScaler::get_coreScalerDisabled() {
+        return coreScalerDisabled;
+    }
+
+
 }
