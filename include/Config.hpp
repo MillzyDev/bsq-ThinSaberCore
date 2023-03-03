@@ -14,8 +14,5 @@ namespace ThinSaberCore {
 
         static float getLength();
         static void setLength(float value);
-
-        static bool getLawEnforcement();
-        static void setLawEnforcement(bool value);
     };
 }
