@@ -1,7 +1,5 @@
 #include "Il2CppMethods/Transform.hpp"
 
-#define STRING(str) il2cpp_utils::newcsstr(str)
-
 namespace ThinSaberCore::Il2CppMethods {
     void Transform::set_localScale(Il2CppObject *obj, CustomTypes::Vector3 value) {
         CRASH_UNLESS(il2cpp_utils::SetPropertyValue(obj, "localScale", value));
