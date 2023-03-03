@@ -39,6 +39,7 @@ namespace ThinSaberCore {
 
     void Config::setThickness(float value) {
         getConfig().config[THICKNESS].SetFloat(value);
+        getConfig().Write();
     }
 
     float Config::getLength() {
@@ -47,5 +48,6 @@ namespace ThinSaberCore {
 
     void Config::setLength(float value) {
         getConfig().config[LENGTH].SetFloat(value);
+        getConfig().Write();
     }
 }
