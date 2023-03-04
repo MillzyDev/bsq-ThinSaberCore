@@ -7,6 +7,7 @@
     "version": "1.0.0",
     "url": "https://github.com/MillzyDev/bsq-ThinSaberCore",
     "additionalData": {
+      "soLink": "https://github.com/MillzyDev/bsq-ThinSaberCore/releases/download/v1.0.0/libthinsabercore.so",
       "overrideSoName": "libthinsabercore.so",
       "cmake": true
     }
@@ -32,24 +33,24 @@
       "copy": [
         "powershell ./scripts/copy.ps1"
       ],
+      "restart": [
+        "powershell ./scripts/restart-game.ps1"
+      ],
+      "logcat": [
+        "powershell ./scripts/start-logging.ps1"
+      ],
+      "build": [
+        "powershell ./scripts/build.ps1"
+      ],
+      "stack": [
+        "powershell ./scripts/ndk-stack.ps1"
+      ],
       "tomb": [
         "powershell ./scripts/pull-tombstone.ps1"
       ],
       "qmod": [
         "powershell ./scripts/build.ps1",
         "powershell ./scripts/createqmod.ps1"
-      ],
-      "build": [
-        "powershell ./scripts/build.ps1"
-      ],
-      "restart": [
-        "powershell ./scripts/restart-game.ps1"
-      ],
-      "stack": [
-        "powershell ./scripts/ndk-stack.ps1"
-      ],
-      "logcat": [
-        "powershell ./scripts/start-logging.ps1"
       ]
     }
   }
