@@ -11,7 +11,7 @@ MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(SaberModelController_Init, "", "SaberModelC
 ) {
     SaberModelController_Init(self, parent, saber);
 
-    if (SaberScaler::get_coreScalerDisabled()) return;
+    if (SaberScaler::getCoreScalerDisabled()) return;
 
     CustomTypes::Vector3 saberScale = SaberScaler::getSaberScale();
     CustomTypes::Vector3 glowScale = SaberScaler::getGlowScale();
