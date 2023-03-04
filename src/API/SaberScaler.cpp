@@ -53,11 +53,11 @@ namespace ThinSaberCore {
         return { thickness, length, thickness};
     }
 
-    void SaberScaler::set_coreScalerDisabled(bool value) {
+    void SaberScaler::setCoreScalerDisabled(bool value) {
         coreScalerDisabled = value;
     }
 
-    bool SaberScaler::get_coreScalerDisabled() {
+    bool SaberScaler::getCoreScalerDisabled() {
         return coreScalerDisabled;
     }
 
