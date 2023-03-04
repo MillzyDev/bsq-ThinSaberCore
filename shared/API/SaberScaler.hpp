@@ -22,7 +22,7 @@ namespace ThinSaberCore {
         static CustomTypes::Vector3 getLegalisedSaberScale();
         static CustomTypes::Vector3 getLegalisedGlowScale();
 
-        static void set_coreScalerDisabled(bool value);
-        static bool get_coreScalerDisabled();
+        static void setCoreScalerDisabled(bool value);
+        static bool getCoreScalerDisabled();
     };
 }
