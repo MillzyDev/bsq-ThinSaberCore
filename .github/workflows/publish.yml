@@ -35,12 +35,7 @@ jobs:
           workflow: cargo-build.yml
           name: linux-qpm-rust
           path: QPM
-          repo: RedBrumbler/QuestPackageManager-Rust
-
-      - name: QPM Collapse
-        run: |
-          chmod +x ./QPM/qpm-rust
-          ./QPM/qpm-rust collapse
+          repo: QuestPackageManager/QPM.CLI
 
       - name: QPM Dependencies Cache
         id: cache-qpm-deps
