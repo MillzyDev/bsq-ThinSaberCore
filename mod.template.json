@@ -4,7 +4,7 @@
   "id": "${mod_id}",
   "author": "Millzy",
   "version": "${version}",
-  "description": "${mod_id}, version ${version}!",
+  "description": "A version agnostic Beat Saber mod that can make your saber's thinner (and shorter).",
   "packageId": "com.beatgames.beatsaber",
   "dependencies": [],
   "modFiles": [],
