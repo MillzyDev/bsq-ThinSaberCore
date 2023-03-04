@@ -60,6 +60,4 @@ namespace ThinSaberCore {
     bool SaberScaler::getCoreScalerDisabled() {
         return coreScalerDisabled;
     }
-
-
 }
