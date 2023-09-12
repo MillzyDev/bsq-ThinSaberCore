@@ -23,11 +23,11 @@ MAKE_HOOK_FIND_CLASS_UNSAFE_INSTANCE(SaberModelController_Init, "", "SaberModelC
     if (!basicSaberTransform) return;
     Transform::set_localScale(basicSaberTransform, saberScale);
 
-    Il2CppObject *fakeGlow0Transform = Transform::Find(transform, "FakeFlow0");
+    Il2CppObject *fakeGlow0Transform = Transform::Find(transform, "FakeGlow0");
     if (!fakeGlow0Transform) return;
     Transform::set_localScale(fakeGlow0Transform, glowScale);
 
-    Il2CppObject *fakeFlow1Transform = Transform::Find(transform, "FakeFlow1");
+    Il2CppObject *fakeFlow1Transform = Transform::Find(transform, "FakeGlow1");
     if (!fakeFlow1Transform) return;
     Transform::set_localScale(fakeFlow1Transform, glowScale);
 }
