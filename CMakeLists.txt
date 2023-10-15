@@ -30,6 +30,7 @@ add_compile_options(-frtti -fexceptions)
 add_compile_options(-O3)
 # compile definitions used
 add_compile_definitions(VERSION=\"${MOD_VERSION}\")
+add_compile_definitions(VERSION_LONG=1)
 add_compile_definitions(MOD_ID=\"${MOD_ID}\")
 
 # recursively get all src files
