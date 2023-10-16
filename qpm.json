@@ -15,7 +15,7 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^3.8.0",
+      "versionRange": "^4.0.0",
       "additionalData": {
         "extraFiles": [
           "src/inline-hook"
@@ -23,8 +23,8 @@
       }
     },
     {
-      "id": "modloader",
-      "versionRange": "=1.2.3",
+      "id": "scotland2",
+      "versionRange": "^0.1.2",
       "additionalData": {}
     }
   ],
